@@ -14,6 +14,7 @@ dependencies {
     compile 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     compile 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 
 }
 
