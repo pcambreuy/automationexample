@@ -1,6 +1,5 @@
 package sample;
 
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -14,18 +13,14 @@ import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CryptoTest {
 
     public AndroidDriver<MobileElement> driver;
     public WebDriverWait wait;
 
-    By cryptoName = By.id("com.example.automationexample:id/tv_name");
-    By cryptoTable = By.id("com.example.automationexample:id/rv_currencies");
     By cryptoCell = By.id("com.example.automationexample:id/cl_cell");
-//    By animationBy      = By.id("com.isinolsun.app:id/animation_view");
-//    By toolBarTitleBy   = By.id("com.isinolsun.app:id/toolbarTitle");
 
     @BeforeMethod
     public void setup() throws MalformedURLException {
@@ -52,33 +47,23 @@ public class CryptoTest {
         wait = new WebDriverWait(driver, 10);
     }
 
-//    @Test
-//    public void testFirstCell() throws InterruptedException {
-//
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(cryptoTable));
-//
-//        List<MobileElement> allCells = driver.findElements(cryptoCell);
-//        MobileElement firstCell = allCells.get(0).findElement(cryptoName);
-//
-//        String cryptoName = firstCell.getText();
-//        Assert.assertEquals(cryptoName, "BTC", "First crypto item is not correct");
-//
-//        //Note: this will only return one element, the recyclerview
-//        // List<MobileElement> elements = driver.findElements(cryptoTable);
-//        // MobileElement btcCell = elements.get(0);
-//    }
+    @Test
+    public void waitForRecyclerViewWithStaticWait() throws InterruptedException {
+        Thread.sleep(6000);
+        Assert.assertFalse(driver.findElements(cryptoCell).isEmpty());
+    }
 
     @Test
-    public void checkLastCell() {
-        //http://appium.io/docs/en/writing-running-appium/tutorial/swipe/android-simple/
-        wait.until(ExpectedConditions.visibilityOfElementLocated(cryptoTable));
+    public void waitForRecyclerViewWitImplicitWait() {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //Assert.assertFalse(driver.findElements(cryptoCell).isEmpty());
+        driver.findElements(cryptoCell).get(0).click();
+    }
 
-        MobileElement element = (MobileElement) driver.findElement(MobileBy.AndroidUIAutomator(
-                "new UiScrollable(new UiSelector().scrollable(true))" +
-                        ".scrollIntoView(new UiSelector().resourceIdMatches(\".*tv_name.*\").text(\"RUNE\"))"));
-
-        Assert.assertNotNull(element);
-
+    @Test
+    public void waitForRecyclerViewWitExplicitWait() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cryptoCell));
+        Assert.assertFalse(driver.findElements(cryptoCell).isEmpty());
     }
 
     @AfterMethod
