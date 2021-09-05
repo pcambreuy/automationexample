@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'io.appium:java-client:7.5.1'
+    compile 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    compile 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
+
+}
+
+task smokeTests(type: Test) { // we define a task with name ‘smokeTests’
+    useTestNG() {
+        useDefaultListeners = true
+        suites 'src/test/suite.xml'
+        includeGroups 'smoke' // We define the group name by using ‘includeGroups’ parameter.
+    }
+}
+
+test {
+    useJUnitPlatform()
+    useTestNG() { //Tells Gradle to use TestNG
+        useDefaultListeners = true // Tells TestNG to execute its default reporting structure
+        suites 'src/test/suite.xml' //location of our suite.xml
+    }
+}
