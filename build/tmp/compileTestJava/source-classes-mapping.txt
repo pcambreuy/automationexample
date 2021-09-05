@@ -1,2 +1,6 @@
+sample/CryptoListPage.java
+ sample.CryptoListPage
 sample/CryptoTest.java
  sample.CryptoTest
+sample/CryptoDetailPage.java
+ sample.CryptoDetailPage
