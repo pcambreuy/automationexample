@@ -52,21 +52,21 @@ public class CryptoTest {
         wait = new WebDriverWait(driver, 10);
     }
 
-//    @Test
-//    public void testFirstCell() throws InterruptedException {
-//
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(cryptoTable));
-//
-//        List<MobileElement> allCells = driver.findElements(cryptoCell);
-//        MobileElement firstCell = allCells.get(0).findElement(cryptoName);
-//
-//        String cryptoName = firstCell.getText();
-//        Assert.assertEquals(cryptoName, "BTC", "First crypto item is not correct");
-//
-//        //Note: this will only return one element, the recyclerview
-//        // List<MobileElement> elements = driver.findElements(cryptoTable);
-//        // MobileElement btcCell = elements.get(0);
-//    }
+    @Test
+    public void testFirstCell() throws InterruptedException {
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cryptoTable));
+
+        List<MobileElement> allCells = driver.findElements(cryptoCell);
+        MobileElement firstCell = allCells.get(0).findElement(cryptoName);
+
+        String cryptoName = firstCell.getText();
+        Assert.assertEquals(cryptoName, "BTC", "First crypto item is not correct");
+
+        //Note: this will only return one element, the recyclerview
+        // List<MobileElement> elements = driver.findElements(cryptoTable);
+        // MobileElement btcCell = elements.get(0);
+    }
 
     @Test
     public void checkLastCell() {
